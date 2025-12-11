@@ -9,12 +9,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=for-the-badge)](LICENSE)
 [![TFT](https://img.shields.io/badge/TFT-Set%2016-purple?style=for-the-badge)](https://teamfighttactics.leagueoflegends.com/)
 
----
-
-<img src="screenshot.png" alt="TFT Helper Screenshot" width="900"/>
-
-*Your ultimate companion for climbing the TFT ranked ladder*
-
 </div>
 
 ---
@@ -45,36 +39,6 @@
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
 - [Git](https://git-scm.com/)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Konalexon/TFT-Helper.git
-
-# Navigate to project
-cd TFT-Helper
-
-# Install dependencies
-npm install
-
-# Run the app
-npm start
-```
-
----
-
-## 📦 Build
-
-```bash
-# Build for Windows
-npm run build:win
-
-# Build portable version
-npm run build:portable
-```
-
-Output will be in the `dist/` folder.
 
 ---
 
