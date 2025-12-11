@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build outputs
+dist/
+out/
+build/
+
+# Electron cache
+.cache/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment
+.env
+.env.local
+
+# Qt leftovers (old project)
+*.pro.user
+*.qmake.stash
+build-*/
+debug/
+release/
+*.o
+*.obj
+moc_*
+ui_*
+qrc_*
+Makefile*

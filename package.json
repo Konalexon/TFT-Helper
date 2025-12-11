@@ -1,0 +1,49 @@
+{
+  "name": "tft-helper",
+  "version": "1.0.0",
+  "description": "TFT Helper - Set 16: Lore & Legends - MetaTFT Clone",
+  "main": "main.js",
+  "author": "TFT Helper",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:portable": "electron-builder --win portable"
+  },
+  "build": {
+    "appId": "com.tfthelper.app",
+    "productName": "TFT Helper",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "renderer/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        },
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": "icons/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "installerIcon": "icons/icon.ico",
+      "uninstallerIcon": "icons/icon.ico"
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  }
+}
