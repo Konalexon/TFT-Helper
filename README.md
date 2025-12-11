@@ -6,7 +6,7 @@
 
 [![Electron](https://img.shields.io/badge/Electron-47848F?style=for-the-badge&logo=electron&logoColor=white)](https://www.electronjs.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![License: MIT](https://img.shields.io/badge/License-MIT-gold.svg?style=for-the-badge)](LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=for-the-badge)](LICENSE)
 [![TFT](https://img.shields.io/badge/TFT-Set%2016-purple?style=for-the-badge)](https://teamfighttactics.leagueoflegends.com/)
 
 </div>
@@ -80,10 +80,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 
 *This project is not affiliated with or endorsed by Riot Games.*
 
-*Data inspired by [MetaTFT](https://metatft.com). Teamfight Tactics is a trademark of Riot Games, Inc.*
-
 ---
 
-**Designed & Developed by [Konalexon](https://github.com/Konalexon) with ❤️**
+**Designed & Developed by [SpartaKoli](https://github.com/Konalexon) with ❤️**
 
 </div>
