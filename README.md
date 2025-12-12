@@ -19,17 +19,29 @@
 |---------|-------------|
 | 🎮 **15+ Meta Compositions** | Real-time compositions from MetaTFT |
 | 📊 **Live Statistics** | Average placement, win rate, top 4 rate |
-| 🎯 **Positioning Guide** | Visual hex grid for optimal unit placement |
+| 🎯 **Hex Positioning Guide** | Visual hex grid with golden borders for units |
+| 📈 **Stage Progression** | Lvl 4-7 board states with win rates |
+| ⬆️ **Levelling Guide** | Fast 9, Standard, Slow roll strategies |
+| 🎠 **Carousel Priority** | Item recommendations for carousel rounds |
 | 🔍 **Smart Search** | Filter by comp name, tier, or champion |
 | 🌙 **Premium Dark Theme** | MetaTFT-inspired professional design |
-| ⚡ **Lightweight** | Fast and responsive desktop app |
+| ⚡ **Custom Titlebar** | Frameless window with TFT-styled controls |
 
 ---
 
 ## 🖥️ Screenshots
 
 <div align="center">
-<img src="screenshot.png" alt="Main View" width="800"/>
+
+### Main Composition List
+<img src="screenshots/main_view.png" alt="Main View" width="800"/>
+
+### Expanded Composition Details
+<img src="screenshots/detail_view.png" alt="Detail View" width="800"/>
+
+### Hex Positioning Board
+<img src="screenshots/positioning.png" alt="Positioning" width="400"/>
+
 </div>
 
 ---
@@ -39,6 +51,20 @@
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+)
 - [Git](https://git-scm.com/)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Konalexon/TFTHELPER.git
+cd TFTHELPER/electron
+
+# Install dependencies
+npm install
+
+# Run the app
+npm start
+```
 
 ---
 
@@ -57,14 +83,67 @@
 
 ---
 
+## 📁 Project Structure
+
+```
+electron/
+├── main.js              # Electron main process
+├── preload.js           # Context bridge for IPC
+├── package.json         # Dependencies
+├── icons/               # App icons
+└── renderer/
+    ├── index.html       # Main HTML
+    ├── app.js           # Application logic
+    ├── styles.css       # TFT-themed styling
+    └── assets/
+        └── champions/   # Local champion images
+```
+
+---
+
 ## 📋 Composition Tiers
 
 | Tier | Description | Example |
 |------|-------------|---------|
-| 🏆 **S** | Meta-defining, top performers | Quickstriker Yunara, Yordle Veigar |
+| 🏆 **S** | Meta-defining, top performers | Shurima Azir Renekton, Yordle Veigar |
 | 🥈 **A** | Strong, consistent results | Assassin Diana, Arcana Xerath |
 | 🥉 **B** | Situational, needs specific items | Faerie Kalista, Hunter Kog'Maw |
 | ⚪ **C** | Risky, requires highroll | Sugarcraft Jinx, Preserver Karma |
+
+---
+
+## 🎨 UI Features
+
+### MetaTFT-Inspired Design
+- **Dark theme** with gold accents (#c9aa58)
+- **Hexagonal positioning grid** with proper offset rows
+- **Champion splash arts** from Community Dragon CDN
+- **Local assets** for special units (Tibbers, Baron, Herald, etc.)
+
+### Detail Panel
+- **Options & Quick Start** - Stage progression boards
+- **Units & Items** - Champion details with BIS items
+- **Traits & Stats** - Synergy information
+
+### Responsive Components
+- Expandable composition rows
+- Compact levelling indicators
+- Carousel priority with item icons
+
+---
+
+## 🔄 Recent Changes
+
+### v1.0.0 (December 2024)
+- ✅ MetaTFT-style UI with dark theme
+- ✅ 15+ Set 16 compositions with real data
+- ✅ Hexagonal positioning board with gold borders
+- ✅ Stage progression (Lvl 4-7) boards
+- ✅ Levelling guide with Fast 9/Standard strategies
+- ✅ Carousel priority items
+- ✅ Custom frameless window with TFT-styled controls
+- ✅ Local champion images for special units
+- ✅ Smart search filtering
 
 ---
 
@@ -78,7 +157,8 @@ This project is licensed under the **Apache 2.0 License** - see the [LICENSE](LI
 
 ### ⚠️ Disclaimer
 
-*This project is not affiliated with or endorsed by Riot Games.*
+*This project is not affiliated with or endorsed by Riot Games.*  
+*TFT Helper is a fan-made tool for educational purposes.*
 
 ---
 
