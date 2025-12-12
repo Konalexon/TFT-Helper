@@ -36,11 +36,8 @@
 ### Main Composition List
 <img src="screenshots/main_view.png" alt="Main View" width="800"/>
 
-### Expanded Composition Details
-<img src="screenshots/detail_view.png" alt="Detail View" width="800"/>
-
-### Hex Positioning Board
-<img src="screenshots/positioning.png" alt="Positioning" width="400"/>
+### Composition Details
+<img src="screenshots/comp_info.png" alt="Composition Info" width="800"/>
 
 </div>
 
