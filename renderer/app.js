@@ -456,6 +456,14 @@ function initApp() {
     renderCompositions();
     initHexGrid();
     initTitlebar();
+    initNavigation();
+
+    // Initial page content
+    renderItemsPage();
+    renderUnitsPage();
+    renderTraitsPage();
+    renderAugmentsPage();
+    renderBuilderPage();
 
     // Search functionality
     const searchInput = document.getElementById('searchInput');
@@ -477,6 +485,320 @@ function initApp() {
     if (compsAnalyzed) {
         compsAnalyzed.textContent = '552,748';
     }
+}
+
+// Navigation system
+function initNavigation() {
+    const navLinks = document.querySelectorAll('.nav-link[data-page]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageId = link.dataset.page;
+
+            // Update active nav link
+            navLinks.forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+
+            // Show corresponding page
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const targetPage = document.getElementById(`page-${pageId}`);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+        });
+    });
+}
+
+// Render Items Page - Professional grid with recipes
+function renderItemsPage() {
+    const grid = document.getElementById('itemsGrid');
+    if (!grid) return;
+
+    const componentItems = [
+        { name: 'B.F. Sword', stat: '+10 AD', img: TFT_ITEMS['BF'] },
+        { name: 'Recurve Bow', stat: '+10% AS', img: TFT_ITEMS['Bow'] },
+        { name: 'Needlessly Large Rod', stat: '+10 AP', img: TFT_ITEMS['Rod'] },
+        { name: 'Tear of the Goddess', stat: '+15 Mana', img: TFT_ITEMS['Tear'] },
+        { name: 'Chain Vest', stat: '+20 Armor', img: TFT_ITEMS['Chain'] },
+        { name: 'Negatron Cloak', stat: '+20 MR', img: TFT_ITEMS['Cloak'] },
+        { name: 'Giant\'s Belt', stat: '+150 HP', img: TFT_ITEMS['Belt'] },
+        { name: 'Sparring Gloves', stat: '+5% Crit', img: TFT_ITEMS['Glove'] },
+    ];
+
+    const completedItems = [
+        { name: 'Infinity Edge', desc: 'Crits deal 10% more damage', recipe: 'BF + Gloves', tier: 'S', img: TFT_ITEMS['IE'] },
+        { name: 'Jeweled Gauntlet', desc: 'Abilities can crit', recipe: 'Rod + Gloves', tier: 'S', img: TFT_ITEMS['JG'] },
+        { name: 'Giant Slayer', desc: 'Deal 25% bonus to 1600+ HP', recipe: 'BF + Bow', tier: 'A', img: TFT_ITEMS['GS'] },
+        { name: 'Hand of Justice', desc: '+15 AD/AP, Heal or damage', recipe: 'Gloves + Tear', tier: 'S', img: TFT_ITEMS['HoJ'] },
+        { name: 'Spear of Shojin', desc: '+15 Mana on attack', recipe: 'BF + Tear', tier: 'A', img: TFT_ITEMS['Shojin'] },
+        { name: 'Guardian Angel', desc: 'Revive with 400 HP once', recipe: 'BF + Vest', tier: 'B', img: TFT_ITEMS['GA'] },
+        { name: 'Warmog\'s Armor', desc: 'Regen 2% max HP/sec', recipe: 'Belt + Belt', tier: 'A', img: TFT_ITEMS['Warmog'] },
+        { name: 'Dragon\'s Claw', desc: '+80 MR, 9% heal', recipe: 'Cloak + Cloak', tier: 'A', img: TFT_ITEMS['DClaw'] },
+        { name: 'Rapid Firecannon', desc: '+50% AS, +1 Range', recipe: 'Bow + Bow', tier: 'A', img: TFT_ITEMS['RFC'] },
+        { name: 'Blue Buff', desc: 'Restore 20 Mana after cast', recipe: 'Tear + Tear', tier: 'A', img: TFT_ITEMS['BB'] },
+    ];
+
+    grid.innerHTML = `
+        <div class="items-section">
+            <h3 class="section-title">⚔️ Component Items</h3>
+            <div class="items-component-grid">
+                ${componentItems.map(item => `
+                    <div class="item-component">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="item-component-info">
+                            <span class="item-name">${item.name}</span>
+                            <span class="item-stat">${item.stat}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+        <div class="items-section">
+            <h3 class="section-title">🏆 Completed Items</h3>
+            <div class="items-completed-grid">
+                ${completedItems.map(item => `
+                    <div class="item-completed tier-${item.tier.toLowerCase()}">
+                        <img src="${item.img}" alt="${item.name}">
+                        <div class="item-completed-info">
+                            <div class="item-header">
+                                <span class="item-name">${item.name}</span>
+                                <span class="item-tier tier-badge-${item.tier.toLowerCase()}">${item.tier}</span>
+                            </div>
+                            <p class="item-desc">${item.desc}</p>
+                            <span class="item-recipe">📦 ${item.recipe}</span>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+// Champion costs database
+const CHAMPION_COSTS = {
+    "Azir": 5, "Renekton": 3, "Tibbers": 5, "Shyvana": 4, "Annie": 2, "Seraphine": 2,
+    "Swain": 3, "Neeko": 4, "Vi": 4, "Veigar": 4, "Lulu": 1, "Rumble": 2, "Poppy": 1,
+    "Teemo": 2, "Tristana": 1, "Kennen": 3, "Diana": 3, "Talon": 4, "Katarina": 3,
+    "Akali": 4, "Zed": 2, "Xerath": 5, "Syndra": 4, "Ahri": 3, "Lux": 4,
+    "Morgana": 3, "Kindred": 4, "Kalista": 3, "Thresh": 2, "Jinx": 4, "Draven": 4,
+    "Senna": 3, "Lucian": 2, "Garen": 1, "Vayne": 3, "Caitlyn": 1, "Galio": 5,
+};
+
+// Get champion traits
+function getChampionTraits(name) {
+    const traitMap = {
+        "Azir": "Shurima • Invoker",
+        "Renekton": "Shurima • Bruiser",
+        "Tibbers": "Arcana • Bruiser",
+        "Shyvana": "Dragon • Shapeshifter",
+        "Annie": "Arcana • Mage",
+        "Diana": "Frost • Assassin",
+        "Veigar": "Yordle • Mage",
+        "Lulu": "Yordle • Enchanter",
+        "Teemo": "Yordle • Specialist",
+        "Jinx": "Rebel • Marksman",
+        "Draven": "Noxus • Marksman",
+    };
+    return traitMap[name] || "Unknown";
+}
+
+// Render Units Page - Professional champion cards
+function renderUnitsPage() {
+    const grid = document.getElementById('unitsGrid');
+    if (!grid) return;
+
+    const units = Object.entries(CHAMPION_COSTS).map(([name, cost]) => ({
+        name,
+        cost,
+        img: getChampionImageUrl(name),
+        traits: getChampionTraits(name)
+    })).sort((a, b) => a.cost - b.cost);
+
+    grid.innerHTML = units.map(unit => `
+        <div class="unit-card cost-border-${unit.cost}">
+            <div class="unit-card-img-container">
+                <img src="${unit.img}" alt="${unit.name}" class="unit-card-img" 
+                     onerror="this.src='${getChampionIconUrl(unit.name)}'">
+                <span class="unit-cost-badge cost-${unit.cost}">${unit.cost}</span>
+            </div>
+            <div class="unit-card-body">
+                <div class="unit-card-name">${unit.name}</div>
+                <div class="unit-traits">${unit.traits}</div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Render Traits Page with colored icons
+function renderTraitsPage() {
+    const grid = document.getElementById('traitsGrid');
+    if (!grid) return;
+
+    const traits = [
+        { name: 'Shurima', icon: '🏜️', desc: 'Shurima units gain bonus Armor and Magic Resist. Each Ascended unit increases this bonus.', breakpoints: [2, 4, 6, 9], color: '#d4a941' },
+        { name: 'Arcana', icon: '✨', desc: 'Arcana champions gain bonus Ability Power and their abilities deal bonus magic damage.', breakpoints: [2, 4, 6, 8], color: '#a855f7' },
+        { name: 'Yordle', icon: '🍄', desc: 'Yordles gain Attack Speed that increases at each breakpoint.', breakpoints: [3, 5, 7], color: '#22c55e' },
+        { name: 'Bruiser', icon: '💪', desc: 'Bruisers gain bonus maximum Health.', breakpoints: [2, 4, 6], color: '#b45309' },
+        { name: 'Mage', icon: '🔮', desc: 'Mages cast their Ability twice and have modified Ability Power.', breakpoints: [3, 5, 7, 9], color: '#3b82f6' },
+        { name: 'Assassin', icon: '🗡️', desc: 'Assassins leap to the enemy backline at combat start. They gain bonus Critical Strike Chance and Damage.', breakpoints: [2, 4, 6], color: '#ec4899' },
+        { name: 'Marksman', icon: '🎯', desc: 'Marksmen\'s attacks bounce to nearby enemies, dealing reduced damage.', breakpoints: [2, 4, 6], color: '#ef4444' },
+        { name: 'Tank', icon: '🛡️', desc: 'Tanks gain Armor, Magic Resist, and reduce incoming damage.', breakpoints: [2, 4, 6, 8], color: '#6b7280' },
+        { name: 'Enchanter', icon: '💫', desc: 'Enchanters\' heals and shields are stronger. Allies healed gain bonus Magic Resist.', breakpoints: [2, 3, 4, 5], color: '#10b981' },
+        { name: 'Invoker', icon: '⚡', desc: 'Invokers gain bonus Mana with each attack.', breakpoints: [2, 4, 6], color: '#8b5cf6' },
+        { name: 'Dragon', icon: '🐉', desc: 'Dragons gain bonus Health and deal bonus magic damage on attack.', breakpoints: [2, 3], color: '#f97316' },
+        { name: 'Frost', icon: '❄️', desc: 'Frost units slow enemies they attack. At higher levels, they can freeze enemies.', breakpoints: [2, 4, 6], color: '#06b6d4' },
+    ];
+
+    grid.innerHTML = traits.map(trait => `
+        <div class="trait-card" style="border-left: 4px solid ${trait.color}">
+            <div class="trait-icon-box" style="background: linear-gradient(135deg, ${trait.color}40, ${trait.color}20)">
+                <span class="trait-emoji">${trait.icon}</span>
+            </div>
+            <div class="trait-info">
+                <h4 style="color: ${trait.color}">${trait.name}</h4>
+                <p>${trait.desc}</p>
+                <div class="trait-breakpoints">
+                    ${trait.breakpoints.map((b, i) => `
+                        <span class="trait-breakpoint" style="background: ${i === trait.breakpoints.length - 1 ? trait.color : 'var(--bg-hover)'}; color: ${i === trait.breakpoints.length - 1 ? '#111' : trait.color}">${b}</span>
+                    `).join('')}
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Render Augments Page with tier-colored icons
+function renderAugmentsPage() {
+    const grid = document.getElementById('augmentsGrid');
+    if (!grid) return;
+
+    const augments = [
+        { name: 'Jeweled Lotus', tier: 'prismatic', icon: '💎', desc: 'Your team\'s abilities can critically strike.', avg: 3.8, winRate: 52.3 },
+        { name: 'Level Up!', tier: 'prismatic', icon: '⬆️', desc: 'When you buy XP, gain an additional 2. Gain 8 XP now.', avg: 3.9, winRate: 51.1 },
+        { name: 'Trade Sector', tier: 'gold', icon: '🔄', desc: 'Gain 1 free reroll each round.', avg: 4.1, winRate: 48.5 },
+        { name: 'Cybernetic Uplink', tier: 'gold', icon: '🤖', desc: 'Your units with an item gain 200 HP and restore 3 Mana per second.', avg: 4.0, winRate: 49.2 },
+        { name: 'Metabolic Accelerator', tier: 'silver', icon: '❤️', desc: 'Heal 3 player health at the start of each round.', avg: 4.3, winRate: 47.1 },
+        { name: 'Tiny Titans', tier: 'silver', icon: '🛡️', desc: 'Gain 25 player health immediately.', avg: 4.5, winRate: 45.8 },
+        { name: 'Component Grab Bag', tier: 'gold', icon: '🎁', desc: 'Gain 2 random item components.', avg: 4.2, winRate: 47.9 },
+        { name: 'Gold Reserves', tier: 'gold', icon: '💰', desc: 'Gain 15 gold now.', avg: 4.2, winRate: 48.0 },
+        { name: 'Stand United', tier: 'gold', icon: '🤝', desc: 'Your team gains 5 Armor and Magic Resist per ally.', avg: 4.0, winRate: 49.0 },
+        { name: 'Electrocharge', tier: 'prismatic', icon: '⚡', desc: 'When your units cast, they deal bonus magic damage.', avg: 3.7, winRate: 52.8 },
+    ];
+
+    const tierColors = { silver: '#9ca3af', gold: '#fbbf24', prismatic: '#a855f7' };
+    const tierIcons = { silver: '🥈', gold: '🥇', prismatic: '💜' };
+
+    grid.innerHTML = augments.map(aug => `
+        <div class="augment-card ${aug.tier}">
+            <div class="augment-icon-box" style="background: linear-gradient(135deg, ${tierColors[aug.tier]}40, ${tierColors[aug.tier]}20); border: 2px solid ${tierColors[aug.tier]}">
+                <span class="augment-emoji">${aug.icon}</span>
+            </div>
+            <div class="augment-info">
+                <div class="augment-header">
+                    <h4>${aug.name}</h4>
+                    <span class="augment-tier-badge" style="background: ${tierColors[aug.tier]}">${aug.tier.toUpperCase()}</span>
+                </div>
+                <p>${aug.desc}</p>
+                <div class="augment-stats">
+                    <span class="augment-stat"><strong>AVG:</strong> ${aug.avg.toFixed(1)}</span>
+                    <span class="augment-stat win-rate"><strong>Win:</strong> ${aug.winRate.toFixed(1)}%</span>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Builder state
+let builderTeam = [];
+
+// Render Builder Page with functional drag-drop
+function renderBuilderPage() {
+    const champList = document.getElementById('builderChampList');
+    const builderGrid = document.getElementById('builderGrid');
+    if (!champList || !builderGrid) return;
+
+    // Create hex grid for builder
+    builderGrid.innerHTML = '';
+    for (let row = 0; row < 4; row++) {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = `builder-hex-row${row % 2 === 1 ? ' odd' : ''}`;
+        for (let col = 0; col < 7; col++) {
+            const cell = document.createElement('div');
+            cell.className = 'builder-hex-cell';
+            cell.dataset.index = row * 7 + col;
+            cell.addEventListener('click', () => removeFromBuilder(row * 7 + col));
+            rowDiv.appendChild(cell);
+        }
+        builderGrid.appendChild(rowDiv);
+    }
+
+    // List all champions sorted by cost
+    const champs = Object.entries(CHAMPION_COSTS).sort((a, b) => a[1] - b[1]);
+
+    champList.innerHTML = champs.map(([name, cost]) => `
+        <div class="builder-champ cost-border-${cost}" onclick="addToBuilder('${name}')" title="${name} (${cost} cost)">
+            <img src="${getChampionImageUrl(name)}" alt="${name}"
+                 onerror="this.src='${getChampionIconUrl(name)}'">
+            <span class="builder-champ-cost cost-${cost}">${cost}</span>
+        </div>
+    `).join('');
+
+    updateBuilderTraits();
+}
+
+// Add champion to builder
+function addToBuilder(name) {
+    if (builderTeam.length >= 10) return;
+
+    // Find first empty slot
+    const cells = document.querySelectorAll('.builder-hex-cell');
+    let placed = false;
+
+    cells.forEach((cell, i) => {
+        if (!placed && !cell.classList.contains('filled')) {
+            cell.classList.add('filled');
+            cell.innerHTML = `<img src="${getChampionImageUrl(name)}" alt="${name}" 
+                onerror="this.src='${getChampionIconUrl(name)}'">`;
+            cell.dataset.champion = name;
+            builderTeam.push({ name, index: i });
+            placed = true;
+        }
+    });
+
+    updateBuilderTraits();
+}
+
+// Remove champion from builder
+function removeFromBuilder(index) {
+    const cell = document.querySelector(`.builder-hex-cell[data-index="${index}"]`);
+    if (cell && cell.classList.contains('filled')) {
+        cell.classList.remove('filled');
+        cell.innerHTML = '';
+        delete cell.dataset.champion;
+        builderTeam = builderTeam.filter(c => c.index !== index);
+        updateBuilderTraits();
+    }
+}
+
+// Update traits display
+function updateBuilderTraits() {
+    const traitsContainer = document.getElementById('builderTraits');
+    if (!traitsContainer) return;
+
+    const traitCounts = {};
+    builderTeam.forEach(({ name }) => {
+        const traits = getChampionTraits(name).split(' • ');
+        traits.forEach(t => {
+            traitCounts[t] = (traitCounts[t] || 0) + 1;
+        });
+    });
+
+    traitsContainer.innerHTML = Object.entries(traitCounts)
+        .sort((a, b) => b[1] - a[1])
+        .map(([trait, count]) => `
+            <span class="builder-trait"><strong>${count}</strong> ${trait}</span>
+        `).join('');
 }
 
 // Create composition row HTML

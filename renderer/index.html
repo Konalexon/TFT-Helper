@@ -31,16 +31,16 @@
         <!-- Sidebar -->
         <nav class="sidebar">
             <div class="nav-section">
-                <a href="#" class="nav-link">In Game</a>
-                <a href="#" class="nav-link active">Pro Comps</a>
-                <a href="#" class="nav-link">Items</a>
-                <a href="#" class="nav-link">Units</a>
-                <a href="#" class="nav-link">Traits</a>
-                <a href="#" class="nav-link">Augments</a>
-                <a href="#" class="nav-link">Data Explorer</a>
-                <a href="#" class="nav-link">Tables</a>
-                <a href="#" class="nav-link">Team Builder</a>
-                <a href="#" class="nav-link">Match History</a>
+                <a href="#" class="nav-link" data-page="ingame">In Game</a>
+                <a href="#" class="nav-link active" data-page="comps">Pro Comps</a>
+                <a href="#" class="nav-link" data-page="items">Items</a>
+                <a href="#" class="nav-link" data-page="units">Units</a>
+                <a href="#" class="nav-link" data-page="traits">Traits</a>
+                <a href="#" class="nav-link" data-page="augments">Augments</a>
+                <a href="#" class="nav-link" data-page="explorer">Data Explorer</a>
+                <a href="#" class="nav-link" data-page="tables">Tables</a>
+                <a href="#" class="nav-link" data-page="builder">Team Builder</a>
+                <a href="#" class="nav-link" data-page="history">Match History</a>
             </div>
 
             <div class="sidebar-footer">
@@ -54,103 +54,234 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <!-- Header -->
-            <header class="content-header">
-                <div class="header-top">
-                    <h1>Team Compositions</h1>
-                    <div class="header-meta">
-                        <span>Last Updated: <strong id="lastUpdate">Just now</strong></span>
-                        <span>Comps Analyzed: <strong>552,748</strong></span>
+            <!-- PAGE: Pro Comps (default) -->
+            <section class="page active" id="page-comps">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>Team Compositions</h1>
+                        <div class="header-meta">
+                            <span>Last Updated: <strong id="lastUpdate">Just now</strong></span>
+                            <span>Comps Analyzed: <strong>552,748</strong></span>
+                        </div>
+                        <div class="header-actions">
+                            <button class="btn-refresh" id="refreshBtn">⟳ Refresh</button>
+                        </div>
                     </div>
-                    <div class="header-actions">
-                        <button class="btn-refresh" id="refreshBtn">⟳ Refresh</button>
+                    <p class="header-desc">A tier list of the best team compositions for TFT Set 16: Lore & Legends</p>
+
+                    <div class="filters-row">
+                        <select class="filter-select">
+                            <option>Ranked</option>
+                            <option>Double Up</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Patch 16.1</option>
+                        </select>
+                        <select class="filter-select">
+                            <option>Last 3 Days</option>
+                            <option>Last 7 Days</option>
+                        </select>
+                        <div class="spacer"></div>
+                        <input type="text" class="search-input" placeholder="Search compositions..." id="searchInput">
+                    </div>
+                </header>
+
+                <div class="content-body">
+                    <div class="table-container">
+                        <div class="table-header">
+                            <span class="th-tier">S</span>
+                            <span class="th-name">COMPOSITION</span>
+                            <span class="th-units">CHAMPIONS</span>
+                            <span class="th-stat">AVG</span>
+                            <span class="th-stat">WIN%</span>
+                            <span class="th-stat">TOP4</span>
+                        </div>
+                        <div class="comps-list" id="compsList"></div>
                     </div>
                 </div>
-                <p class="header-desc">A tier list of the best team compositions for TFT Set 16: Lore & Legends</p>
+            </section>
 
-                <div class="filters-row">
-                    <select class="filter-select">
-                        <option>Ranked</option>
-                        <option>Double Up</option>
-                    </select>
-                    <select class="filter-select">
-                        <option>Patch 16.1</option>
-                    </select>
-                    <select class="filter-select">
-                        <option>Last 3 Days</option>
-                        <option>Last 7 Days</option>
-                    </select>
-
-                    <div class="spacer"></div>
-
-                    <input type="text" class="search-input" placeholder="Search compositions..." id="searchInput">
-                </div>
-            </header>
-
-            <!-- Content Body -->
-            <div class="content-body">
-                <!-- Table -->
-                <div class="table-container">
-                    <div class="table-header">
-                        <span class="th-tier">S</span>
-                        <span class="th-name">COMPOSITION</span>
-                        <span class="th-units">CHAMPIONS</span>
-                        <span class="th-stat">AVG</span>
-                        <span class="th-stat">WIN%</span>
-                        <span class="th-stat">TOP4</span>
+            <!-- PAGE: In Game -->
+            <section class="page" id="page-ingame">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>🎮 In Game Overlay</h1>
                     </div>
-
-                    <div class="comps-list" id="compsList">
-                        <!-- Loaded by JS -->
+                    <p class="header-desc">Real-time assistance during your TFT matches</p>
+                </header>
+                <div class="content-body">
+                    <div class="page-content-center">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔗</div>
+                            <h3>Not Connected</h3>
+                            <p>Start a TFT game to see live recommendations</p>
+                            <button class="btn-primary">Connect to Game</button>
+                        </div>
                     </div>
                 </div>
+            </section>
 
-                <!-- Details Panel -->
-                <div class="details-panel" id="detailsPanel">
-                    <div class="panel-empty">
-                        <div class="empty-icon">🎯</div>
-                        <h3>Select a Composition</h3>
-                        <p>Click on a composition to see details</p>
+            <!-- PAGE: Items -->
+            <section class="page" id="page-items">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>⚔️ Items Database</h1>
                     </div>
+                    <p class="header-desc">Complete TFT Set 16 item combinations and stats</p>
+                    <div class="filters-row">
+                        <input type="text" class="search-input" placeholder="Search items..." id="itemsSearch">
+                    </div>
+                </header>
+                <div class="content-body">
+                    <div class="items-grid" id="itemsGrid"></div>
+                </div>
+            </section>
 
-                    <div class="panel-content" id="panelContent" style="display:none;">
-                        <div class="panel-header">
-                            <div class="panel-tier tier-s" id="panelTier">S</div>
-                            <div class="panel-title">
-                                <h2 id="panelName">Composition Name</h2>
-                                <p id="panelDesc">Description</p>
-                            </div>
+            <!-- PAGE: Units -->
+            <section class="page" id="page-units">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>🛡️ Champions</h1>
+                    </div>
+                    <p class="header-desc">All TFT Set 16 champions with stats, abilities, and best items</p>
+                    <div class="filters-row">
+                        <select class="filter-select" id="unitsCostFilter">
+                            <option value="">All Costs</option>
+                            <option value="1">1 Cost</option>
+                            <option value="2">2 Cost</option>
+                            <option value="3">3 Cost</option>
+                            <option value="4">4 Cost</option>
+                            <option value="5">5 Cost</option>
+                        </select>
+                        <input type="text" class="search-input" placeholder="Search champions..." id="unitsSearch">
+                    </div>
+                </header>
+                <div class="content-body">
+                    <div class="units-grid-page" id="unitsGrid"></div>
+                </div>
+            </section>
+
+            <!-- PAGE: Traits -->
+            <section class="page" id="page-traits">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>✨ Traits</h1>
+                    </div>
+                    <p class="header-desc">All synergies and trait bonuses in Set 16</p>
+                </header>
+                <div class="content-body">
+                    <div class="traits-grid" id="traitsGrid"></div>
+                </div>
+            </section>
+
+            <!-- PAGE: Augments -->
+            <section class="page" id="page-augments">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>💎 Augments</h1>
+                    </div>
+                    <p class="header-desc">Silver, Gold, and Prismatic augments ranked by performance</p>
+                    <div class="filters-row">
+                        <select class="filter-select" id="augmentsTierFilter">
+                            <option value="">All Tiers</option>
+                            <option value="silver">Silver</option>
+                            <option value="gold">Gold</option>
+                            <option value="prismatic">Prismatic</option>
+                        </select>
+                        <input type="text" class="search-input" placeholder="Search augments..." id="augmentsSearch">
+                    </div>
+                </header>
+                <div class="content-body">
+                    <div class="augments-grid" id="augmentsGrid"></div>
+                </div>
+            </section>
+
+            <!-- PAGE: Data Explorer -->
+            <section class="page" id="page-explorer">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>📊 Data Explorer</h1>
+                    </div>
+                    <p class="header-desc">Deep dive into TFT statistics and trends</p>
+                </header>
+                <div class="content-body">
+                    <div class="stats-dashboard" id="statsDashboard">
+                        <div class="stat-box">
+                            <h4>Games Analyzed</h4>
+                            <span class="big-stat">552,748</span>
                         </div>
-
-                        <div class="panel-stats">
-                            <div class="stat-card">
-                                <span class="stat-val" id="panelAvg">-</span>
-                                <span class="stat-lbl">AVG PLACE</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-val" id="panelWin">-</span>
-                                <span class="stat-lbl">WIN RATE</span>
-                            </div>
-                            <div class="stat-card">
-                                <span class="stat-val" id="panelTop4">-</span>
-                                <span class="stat-lbl">TOP 4</span>
-                            </div>
+                        <div class="stat-box">
+                            <h4>Current Patch</h4>
+                            <span class="big-stat">16.1</span>
                         </div>
-
-                        <div class="panel-section">
-                            <h4>Team Composition</h4>
-                            <div class="units-grid" id="panelUnits"></div>
+                        <div class="stat-box">
+                            <h4>Active Players</h4>
+                            <span class="big-stat">2.1M</span>
                         </div>
-
-                        <div class="panel-section">
-                            <h4>Positioning</h4>
-                            <div class="hex-grid" id="hexGrid"></div>
-                        </div>
-
-                        <button class="btn-activate" id="activateBtn">✓ ACTIVATE</button>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- PAGE: Tables -->
+            <section class="page" id="page-tables">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>📋 Tables</h1>
+                    </div>
+                    <p class="header-desc">Quick reference tables for items, costs, and more</p>
+                </header>
+                <div class="content-body">
+                    <div class="tables-container" id="tablesContainer">
+                        <div class="data-table">
+                            <h4>Item Recipe Table</h4>
+                            <p>Coming soon...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE: Team Builder -->
+            <section class="page" id="page-builder">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>🔧 Team Builder</h1>
+                    </div>
+                    <p class="header-desc">Plan your perfect team composition</p>
+                </header>
+                <div class="content-body">
+                    <div class="builder-container">
+                        <div class="builder-board">
+                            <h4>Your Team</h4>
+                            <div class="builder-hex-grid" id="builderGrid"></div>
+                        </div>
+                        <div class="builder-champions">
+                            <h4>Available Champions</h4>
+                            <div class="builder-champ-list" id="builderChampList"></div>
+                            <div class="builder-traits" id="builderTraits"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PAGE: Match History -->
+            <section class="page" id="page-history">
+                <header class="content-header">
+                    <div class="header-top">
+                        <h1>📜 Match History</h1>
+                    </div>
+                    <p class="header-desc">Your recent TFT games and performance</p>
+                </header>
+                <div class="content-body">
+                    <div class="page-content-center">
+                        <div class="feature-card">
+                            <div class="feature-icon">🔒</div>
+                            <h3>Login Required</h3>
+                            <p>Connect your Riot account to view match history</p>
+                            <button class="btn-primary">Connect Account</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
