@@ -2,7 +2,7 @@
 
 # ⚔️ TFT Helper
 
-### A MetaTFT-style companion app for Teamfight Tactics
+### A companion app for Teamfight Tactics
 
 [![Electron](https://img.shields.io/badge/Electron-47848F?style=for-the-badge&logo=electron&logoColor=white)](https://www.electronjs.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
@@ -17,14 +17,14 @@
 
 | Feature | Description |
 |---------|-------------|
-| 🎮 **15+ Meta Compositions** | Real-time compositions from MetaTFT |
+| 🎮 **15+ Meta Compositions** | Current meta team compositions |
 | 📊 **Live Statistics** | Average placement, win rate, top 4 rate |
 | 🎯 **Hex Positioning Guide** | Visual hex grid with golden borders for units |
 | 📈 **Stage Progression** | Lvl 4-7 board states with win rates |
 | ⬆️ **Levelling Guide** | Fast 9, Standard, Slow roll strategies |
 | 🎠 **Carousel Priority** | Item recommendations for carousel rounds |
 | 🔍 **Smart Search** | Filter by comp name, tier, or champion |
-| 🌙 **Premium Dark Theme** | MetaTFT-inspired professional design |
+| 🌙 **Premium Dark Theme** | Professional dark design |
 | ⚡ **Custom Titlebar** | Frameless window with TFT-styled controls |
 
 ---
@@ -89,7 +89,7 @@ electron/
 
 ## 🎨 UI Features
 
-### MetaTFT-Inspired Design
+### Professional Design
 - **Dark theme** with gold accents (#c9aa58)
 - **Hexagonal positioning grid** with proper offset rows
 - **Champion splash arts** from Community Dragon CDN
@@ -110,7 +110,7 @@ electron/
 ## 🔄 Recent Changes
 
 ### v1.0.0 (December 2024)
-- ✅ MetaTFT-style UI with dark theme
+- ✅ Professional dark UI with gold accents
 - ✅ 15+ Set 16 compositions with real data
 - ✅ Hexagonal positioning board with gold borders
 - ✅ Stage progression (Lvl 4-7) boards
