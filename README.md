@@ -43,28 +43,6 @@
 
 ---
 
-## 🚀 Quick Start
-
-### Prerequisites
-- [Node.js](https://nodejs.org/) (v18+)
-- [Git](https://git-scm.com/)
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/Konalexon/TFTHELPER.git
-cd TFTHELPER/electron
-
-# Install dependencies
-npm install
-
-# Run the app
-npm start
-```
-
----
-
 ## 🛠️ Tech Stack
 
 <div align="center">
